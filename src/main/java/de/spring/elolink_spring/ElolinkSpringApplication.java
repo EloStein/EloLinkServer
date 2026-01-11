@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ElolinkSpringApplication {
 
 	public void serverTest(){
-		System.out.println("This is the Server");
+		System.out.println("This is the Serverrrrr");
 	}
 
 	public static void main(String[] args) {
