@@ -6,6 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class ElolinkSpringApplication {
 
+	public void serverTest(){
+		System.out.println("This is the Server");
+	}
+
 	public static void main(String[] args) {
 		SpringApplication.run(ElolinkSpringApplication.class, args);
 	}
