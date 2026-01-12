@@ -1,13 +1,11 @@
-package de.spring.elolink_spring.entity;
+package de.spring.elolink_spring.dtos;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import de.spring.elolink_spring.entity.Chat;
+import de.spring.elolink_spring.service.ChatService;
 
-@Entity
-public class ChatEntity {
+public class ChatDto {
 
-    @Id
-    private int id;
+    private String signature;
     private String sender;
     private String receiver;
     private String message;
@@ -15,15 +13,36 @@ public class ChatEntity {
     private String aesKeyOwn;
     private String timestamp;
 
-    public ChatEntity(){
+    public ChatDto(){
     }
 
-    public int getId() {
-        return id;
+    public ChatDto(String signature, String sender, String receiver, String message, String aesKeyRec, String aesKeyOwn, String timestamp) {
+        this.signature = signature;
+        this.sender = sender;
+        this.receiver = receiver;
+        this.message = message;
+        this.aesKeyRec = aesKeyRec;
+        this.aesKeyOwn = aesKeyOwn;
+        this.timestamp = timestamp;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public static ChatDto fromChat(Chat chat){
+        return new ChatDto("true",
+                chat.getSender(),
+                chat.getReceiver(),
+                chat.getMessage(),
+                chat.getAesKeyRec(),
+                chat.getAesKeyOwn(),
+                chat.getTimestamp()
+        );
+    }
+
+    public String getSignature() {
+        return signature;
+    }
+
+    public void setSignature(String signature) {
+        this.signature = signature;
     }
 
     public String getSender() {
@@ -76,8 +95,8 @@ public class ChatEntity {
 
     @Override
     public String toString() {
-        return "ChatEntity{" +
-                "id=" + id +
+        return "ChatDto{" +
+                "signature='" + signature + '\'' +
                 ", sender='" + sender + '\'' +
                 ", receiver='" + receiver + '\'' +
                 ", message='" + message + '\'' +

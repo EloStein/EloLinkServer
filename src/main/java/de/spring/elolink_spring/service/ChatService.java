@@ -1,17 +1,15 @@
 package de.spring.elolink_spring.service;
 
-import de.spring.elolink_spring.entity.ChatEntity;
-import de.spring.elolink_spring.entity.ProfileEntity;
-import de.spring.elolink_spring.entity.StudentEntity;
-import de.spring.elolink_spring.entity.UuidEntity;
+import de.spring.elolink_spring.dtos.ChatDto;
+import de.spring.elolink_spring.entity.Chat;
 import de.spring.elolink_spring.repository.ChatRepository;
-import de.spring.elolink_spring.repository.ProfileRepository;
 import jakarta.transaction.Transactional;
-import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Scheduler;
+import reactor.core.scheduler.Schedulers;
 
-import java.lang.invoke.CallSite;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -24,39 +22,31 @@ public class ChatService {
     private ChatRepository chatRepository;
 
     @Transactional
-    public String addChat(ChatEntity chatEntity) {
-            chatEntity.setId(null == chatRepository.findMaxId() ? 0 : chatRepository.findMaxId() + 1);
-            chatRepository.save(chatEntity);
-            return "#Saved Chat " + chatEntity.getMessage() + " added successfully";
+    public String addChat(ChatDto chatDto) {
+        Chat chat = Chat.fromDto(chatDto);
+        chat.setId((long) (null == chatRepository.findMaxId() ? 0 : chatRepository.findMaxId() + 1));
+        //Todo: Verification!
+        chatRepository.save(chat);
+        System.out.println("#Added Chat '" + chatDto.getMessage() + "' from Sender " + chatDto.getSender());
+        return "200";
     }
 
-    public List<ChatEntity> getChats(){
-        return chatRepository.findAll();
+    public Mono<List<ChatDto>> getConversation(String uuid1, String uuid2) {
+        List<Chat> allChats = new ArrayList<>();
+        allChats.addAll(chatRepository.findBySender(uuid1));
+        allChats.addAll(chatRepository.findBySender(uuid2));
+        List<ChatDto> conversationDto = allChats.stream()
+                .filter(chat ->
+                        (chat.getSender().equals(uuid1) && chat.getReceiver().equals(uuid2)) ||
+                                (chat.getSender().equals(uuid2) && chat.getReceiver().equals(uuid1))
+                )
+                .sorted(Comparator.comparing(Chat::getTimestamp).reversed())
+                .map(ChatDto::fromChat)
+                .toList();
+        System.out.println();
+        return Mono.just(conversationDto);
     }
 
-    public List<ChatEntity> getChatsFromSender(UuidEntity uuidEntity) {
-        return chatRepository.findBySender(uuidEntity.getUuid());
-    }
 
-    public List<ChatEntity> getConversation(String uuid1, String uuid2){
-        List<ChatEntity> c1 = chatRepository.findBySender(uuid1);
-        List<ChatEntity> c2 = chatRepository.findBySender(uuid2);
 
-        c1.removeIf(chatEntity -> !Objects.equals(chatEntity.getReceiver(), uuid2));
-        c2.removeIf(chatEntity -> !Objects.equals(chatEntity.getReceiver(), uuid1));
-
-        List<ChatEntity> conversation = new ArrayList<>();
-        conversation.addAll(c1);
-        conversation.addAll(c2);
-
-        conversation.sort(Comparator.comparing(ChatEntity::getTimestamp).reversed());
-        return conversation;
-
-    }
-
-    @Transactional
-    public String deleteAllChats(){
-        chatRepository.deleteAllNative();
-        return "#Deleted all Chats";
-    }
 }
