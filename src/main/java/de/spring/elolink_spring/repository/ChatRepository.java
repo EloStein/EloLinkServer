@@ -17,8 +17,11 @@ public interface ChatRepository extends JpaRepository<Chat, Integer> {
     @Query(value = "DELETE FROM chat", nativeQuery = true)
     void deleteAllNative();
     public boolean existsById(String id);
-    //public List<ChatEntity> findBySender(String uuid);
     @Query("select max(s.id) from Chat s")
     public Integer findMaxId();
     List<Chat> findBySender(String sender);
+    List<Chat> findByReceiver(String receiver);
+    List<Chat> findByTimestamp(String timestamp);
+    public void deleteBySenderAndReceiverAndTimestamp(String sender, String receiver, String timestamp);
+    List<Chat> findBySenderAndReceiverAndTimestamp(String sender, String receiver, String timestamp);
 }
