@@ -11,18 +11,20 @@ public class ChatDto {
     private String message;
     private String aesKeyRec;
     private String aesKeyOwn;
+    private String spec;
     private String timestamp;
 
     public ChatDto(){
     }
 
-    public ChatDto(String signature, String sender, String receiver, String message, String aesKeyRec, String aesKeyOwn, String timestamp) {
+    public ChatDto(String signature, String sender, String receiver, String message, String aesKeyRec, String aesKeyOwn, String spec, String timestamp) {
         this.signature = signature;
         this.sender = sender;
         this.receiver = receiver;
         this.message = message;
         this.aesKeyRec = aesKeyRec;
         this.aesKeyOwn = aesKeyOwn;
+        this.spec = spec;
         this.timestamp = timestamp;
     }
 
@@ -33,6 +35,7 @@ public class ChatDto {
                 chat.getMessage(),
                 chat.getAesKeyRec(),
                 chat.getAesKeyOwn(),
+                chat.getSpec(),
                 chat.getTimestamp()
         );
     }
@@ -83,6 +86,14 @@ public class ChatDto {
 
     public void setAesKeyOwn(String aesKeyOwn) {
         this.aesKeyOwn = aesKeyOwn;
+    }
+
+    public String getSpec() {
+        return spec;
+    }
+
+    public void setSpec(String spec) {
+        this.spec = spec;
     }
 
     public String getTimestamp() {

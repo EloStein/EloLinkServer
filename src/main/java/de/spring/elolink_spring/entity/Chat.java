@@ -14,18 +14,20 @@ public class Chat {
     private String message;
     private String aesKeyRec;
     private String aesKeyOwn;
+    private String spec;
     private String timestamp;
 
     public Chat(){
     }
 
-    public Chat(Long id, String sender, String receiver, String message, String aesKeyRec, String aesKeyOwn, String timestamp) {
+    public Chat(Long id, String sender, String receiver, String message, String aesKeyRec, String aesKeyOwn, String spec, String timestamp) {
         this.id = id;
         this.sender = sender;
         this.receiver = receiver;
         this.message = message;
         this.aesKeyRec = aesKeyRec;
         this.aesKeyOwn = aesKeyOwn;
+        this.spec = spec;
         this.timestamp = timestamp;
     }
 
@@ -37,6 +39,7 @@ public class Chat {
                 dto.getMessage(),
                 dto.getAesKeyRec(),
                 dto.getAesKeyOwn(),
+                dto.getSpec(),
                 dto.getTimestamp()
         );
     }
@@ -87,6 +90,14 @@ public class Chat {
 
     public void setAesKeyOwn(String aesKeyOwn) {
         this.aesKeyOwn = aesKeyOwn;
+    }
+
+    public String getSpec() {
+        return spec;
+    }
+
+    public void setSpec(String spec) {
+        this.spec = spec;
     }
 
     public String getTimestamp() {

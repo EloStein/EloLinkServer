@@ -1,58 +1,34 @@
 package de.spring.elolink_spring.encryption;
 
-import javax.crypto.Cipher;
-import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.GCMParameterSpec;
-import java.security.*;
-import java.util.Base64;
+import java.security.KeyPair;
 
 public class TestEncryption {
 
-    // AES-GCM Parameter
-    private static final int AES_KEY_SIZE = 256; // Bits
-    private static final int GCM_NONCE_LENGTH = 12; // Bytes
-    private static final int GCM_TAG_LENGTH = 128; // Bits
-
     public static void main(String[] args) throws Exception {
-        // 1️⃣ RSA-Schlüsselpaare generieren (Absender und Empfänger)
-        KeyPairGenerator rsaGen = KeyPairGenerator.getInstance("RSA");
-        rsaGen.initialize(2048);
-        KeyPair senderKeyPair = rsaGen.generateKeyPair();
-        KeyPair receiverKeyPair = rsaGen.generateKeyPair();
+        KeyPair receiverRsaKeyPair = KeyGenerator.genRsaKeyPair();
+        KeyPair senderRsaKeyPair = KeyGenerator.genRsaKeyPair();
 
-        // 2️⃣ AES-Session-Key erzeugen
-        KeyGenerator keyGen = KeyGenerator.getInstance("AES");
-        keyGen.init(AES_KEY_SIZE);
-        SecretKey aesKey = keyGen.generateKey();
+        SecretKey aesKey = KeyGenerator.genAesKey();
+        System.out.println("Unencrypted Aes Key: " + aesKey);
+        byte[] encryptedAesKeyRec = Encrypter.encryptAesKey(receiverRsaKeyPair.getPublic(), aesKey);
+        byte[] encryptedAesKeyOwn = Encrypter.encryptAesKey(senderRsaKeyPair.getPublic(), aesKey);
 
-        // 3️⃣ Session-Key mit RSA des Empfängers verschlüsseln
-        Cipher rsaCipher = Cipher.getInstance("RSA/ECB/OAEPWithSHA-256AndMGF1Padding");
-        rsaCipher.init(Cipher.ENCRYPT_MODE, receiverKeyPair.getPublic());
-        byte[] encryptedSessionKey = rsaCipher.doFinal(aesKey.getEncoded());
-        System.out.println("Encrypted AES Session Key: " + Base64.getEncoder().encodeToString(encryptedSessionKey));
+        System.out.println("Rec decrypted Aes Key like: " + Decrypter.decryptAesKey(receiverRsaKeyPair.getPrivate(), encryptedAesKeyRec));
+        System.out.println("Own decrypted Aes Key like: " + Decrypter.decryptAesKey(senderRsaKeyPair.getPrivate(), encryptedAesKeyOwn));
 
-        // 4️⃣ Nachricht mit AES-GCM verschlüsseln
-        String message = "Hallo, dies ist eine geheime Nachricht!";
-        Cipher aesCipher = Cipher.getInstance("AES/GCM/NoPadding");
+        GCMParameterSpec spec = KeyGenerator.genSpec();
+        byte[] encryptedText = Encrypter.encryptText("TestNachricht", aesKey, spec);
+        System.out.println("Encrypted Message: " + new String(encryptedText));
 
-        byte[] nonce = SecureRandom.getInstanceStrong().generateSeed(GCM_NONCE_LENGTH);
-        GCMParameterSpec spec = new GCMParameterSpec(GCM_TAG_LENGTH, nonce);
-        aesCipher.init(Cipher.ENCRYPT_MODE, aesKey, spec);
-        byte[] ciphertext = aesCipher.doFinal(message.getBytes());
+        SecretKey decryptedAesKeyRec = Decrypter.decryptAesKey(receiverRsaKeyPair.getPrivate(), encryptedAesKeyRec);
+        SecretKey decryptedAesKeyOwn = Decrypter.decryptAesKey(senderRsaKeyPair.getPrivate(), encryptedAesKeyOwn);
 
-        System.out.println("Encrypted message: " + Base64.getEncoder().encodeToString(ciphertext));
+        byte[] decryptedMessageRec = Decrypter.decryptText(encryptedText, decryptedAesKeyRec, spec);
+        byte[] decryptedMessageOwn = Decrypter.decryptText(encryptedText, decryptedAesKeyOwn, spec);
+        System.out.println("Decrypted Message by Rec: " + new String(decryptedMessageRec));
+        System.out.println("Decrypted Message by Own: " + new String(decryptedMessageRec));
 
-        // 5️⃣ Entschlüsseln auf Empfänger-Seite
-        // 5a. Session-Key entschlüsseln
-        rsaCipher.init(Cipher.DECRYPT_MODE, receiverKeyPair.getPrivate());
-        byte[] decryptedSessionKeyBytes = rsaCipher.doFinal(encryptedSessionKey);
-        SecretKey decryptedAesKey = new javax.crypto.spec.SecretKeySpec(decryptedSessionKeyBytes, "AES");
-
-        // 5b. Nachricht entschlüsseln
-        aesCipher.init(Cipher.DECRYPT_MODE, decryptedAesKey, spec);
-        byte[] decryptedMessage = aesCipher.doFinal(ciphertext);
-
-        System.out.println("Decrypted message: " + new String(decryptedMessage));
     }
 }

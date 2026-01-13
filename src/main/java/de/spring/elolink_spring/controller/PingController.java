@@ -5,13 +5,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+import java.time.LocalTime;
+
+@RestController
 public class PingController {
 
     @RequestMapping(value = "/elolink/ping", method = RequestMethod.GET)
-    public String addChat(@RequestBody ChatDto chatDto){
-        return "200";
+    public String getPing(){
+        return "200\n" + LocalTime.now();
     }
 
 }

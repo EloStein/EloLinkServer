@@ -69,6 +69,7 @@ public class ChatService {
             chat.setMessage(chatDto.getMessage());
             chat.setAesKeyRec(chatDto.getAesKeyRec());
             chat.setAesKeyOwn(chatDto.getAesKeyOwn());
+            chat.setSpec(chatDto.getSpec());
             chat.setTimestamp(chatDto.getTimestamp());
             chatRepository.save(chat);
         });

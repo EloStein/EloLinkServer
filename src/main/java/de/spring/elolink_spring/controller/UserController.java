@@ -4,12 +4,9 @@ import de.spring.elolink_spring.dtos.UserDto;
 import de.spring.elolink_spring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 public class UserController {
 
     @Autowired
@@ -25,13 +22,13 @@ public class UserController {
         return userService.getUser(uuid);
     }
 
-//    @RequestMapping(value = "/elolink/deleteuser/{uuid}", method = RequestMethod.DELETE)
-//    public String deleteUser(@PathVariable final String uuid){
-//        return userService.deleteUser(uuid);
-//    }
-//
-//    @RequestMapping(value = "/elolink/updateuser/{uuid}", method = RequestMethod.PUT)
-//    public String updateUser(@PathVariable final String uuid, @RequestBody UserDto user){
-//        return userService.updateUser(uuid, user);
-//    }
+    @RequestMapping(value = "/elolink/deleteuser/{uuid}", method = RequestMethod.DELETE)
+    public String deleteUser(@PathVariable final String uuid){
+        return userService.deleteUser(uuid);
+    }
+
+    @RequestMapping(value = "/elolink/updateuser/{uuid}", method = RequestMethod.PUT)
+    public String updateUser(@PathVariable final String uuid, @RequestBody UserDto user){
+        return userService.updateUser(uuid, user);
+    }
 }
