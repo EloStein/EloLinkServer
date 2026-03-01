@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>EloLink</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="/website/css/style.css" rel="stylesheet">
+<script src="../static/website/js/script.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Monoton&display=swap" rel="stylesheet">
+
+</head>
+
+<body style="height: 962px">
+
+    <div id="sidebar" class="sidebar">
+
+    <script>
+      document.getElementById("sidebar").addEventListener("mouseenter", function() {
+        document.getElementById("sidebar").style.width = "305px";
+        /*document.getElementById("main").style.marginLeft = "0";*/
+        document.getElementById("sidelink0").style.fontSize = "35px";
+        document.getElementById("sidelink1").style.fontSize = "25px";
+        document.getElementById("sidelink2").style.fontSize = "25px";
+        document.getElementById("myInput").style.fontSize = "20px";
+      });
+      document.getElementById("sidebar").addEventListener("mouseleave", function() {
+        document.getElementById("sidebar").style.width = "110px";
+        /*document.getElementById("main").style.marginLeft = "0";*/
+        document.getElementById("sidelink0").style.fontSize = "20px";
+        document.getElementById("sidelink1").style.fontSize = "0px";
+        document.getElementById("sidelink2").style.fontSize = "0px";
+        document.getElementById("myInput").style.fontSize = "0px";
+      });
+      
+    </script>
+
+  <h2 class="zoom" style="margin-bottom: 20px;" id="sidelink0">MEN&uuml;</h2>
+
+    <div style="display: flex; align-items: center;">
+    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Suchen..." title="SEARCH" style="font-family: 'Comfortaa';font-size: 0px;">
+    <p onclick="darkmode()" style="width:0px; height:0px;" id="egg"></p>
+    </div>
+
+    <ul id="myUL">
+      <li><a th:href="@{/elolink}" id="sidelink1" class="swichtSide">Startseite</a></li>
+      <li><a id="sidelink2" class="swichtSide">Downloads</a></li>
+    </ul>
+
+  </div>
+
+  <div id="main">
+    <div style=
+    "height: 10px;
+     width: 100%;
+     margin-top: 30px;
+     display: flex;
+     justify-content: flex-end;
+     align-items: flex-end;
+     font-size: 30pt;">
+  
+   </div>
+
+  <h1 class="zoom" style="margin-bottom: 20px; font-size: 60px;">DOWNLOADS</h1>
+
+  <p class="zoom">EloLink befindet sich noch in der Entwicklungsphase, jedoch koennen Sie bereits Entwicklungsversionen herunterladen:</p>
+  
+
+  <h2 class="zoom" style="margin-top: 150px;" >.zip Downloads</h2>
+    
+  <a href="EloLinkSources_Alpha_0.4.zip" download style="display: flex;justify-content: center;" class="zoom">EloLinkSources_Alpha_0.4.zip</a>
+  <br>
+  <a href="EloLinkSources_Alpha_0.5.zip" download style="display: flex;justify-content: center;" class="zoom">EloLinkSources_Alpha_0.5.zip</a>
+
+
+<h2 class="zoom" >.msi Downloads</h2>
+
+
+  </body>
+</html>

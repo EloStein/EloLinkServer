@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>EloLink</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="/website/css/style.css" rel="stylesheet">
+<script src="../static/website/js/script.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Monoton&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <div id="sidebar" class="sidebar">
+
+    <script>
+     document.getElementById("sidebar").addEventListener("mouseenter", function() {
+        document.getElementById("sidebar").style.width = "305px";
+        /*document.getElementById("main").style.marginLeft = "0";*/
+        document.getElementById("sidelink0").style.fontSize = "35px";
+        document.getElementById("sidelink1").style.fontSize = "25px";
+        document.getElementById("sidelink2").style.fontSize = "25px";
+        document.getElementById("myInput").style.fontSize = "20px";
+      });
+      document.getElementById("sidebar").addEventListener("mouseleave", function() {
+        document.getElementById("sidebar").style.width = "110px";
+        /*document.getElementById("main").style.marginLeft = "0";*/
+        document.getElementById("sidelink0").style.fontSize = "20px";
+        document.getElementById("sidelink1").style.fontSize = "0px";
+        document.getElementById("sidelink2").style.fontSize = "0px";
+        document.getElementById("myInput").style.fontSize = "0px";
+      });
+      
+    </script>
+
+
+
+    <!--<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a> -->
+
+    <h2 class="zoom" style="margin-bottom: 20px;" id="sidelink0">MEN&uuml;</h2>
+
+    <div style="display: flex; align-items: center;">
+    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Suchen..." title="SEARCH" style="font-family: 'Comfortaa';font-size: 0px;">
+    <p onclick="darkmode()" style="width:0px; height:0px;" id="egg"></p>
+    </div>
+
+    <ul id="myUL">
+      <li><a onclick="closeNav()" id="sidelink1" >Startseite</a></li>
+      <li><a th:href="@{/elolink/downloads}" id="sidelink2">Downloads</a></li>
+    </ul>
+
+  </div>
+    
+  <div id="main" class="main">
+
+    <div style=
+    "height: 10px;
+     width: 100%;
+     display: flex;
+     justify-content: flex-end;
+     align-items: flex-start;">
+
+    </div>
+
+    <h1 class="zoom" style="margin-bottom: 20px; font-size: 60px;margin-right: 10px;">ELOLINK</h1>
+
+    <h2 class="zoom" style="margin-bottom: 20px;margin-right: 10px;">-Seit 2025-</h2>
+
+    <div class="introduction" >
+
+      <p class="zoom introduction_text">EloLink ist eine auf Java basierende Messanger ab, entwickelt um die Kommunikation zu vereinfachen. Die Chat-App beinhaltet dei Moeglichkeit mit deinen Freunden zu Chatten, Gruppen zu erstellen und bald auch Dateien zu &#252;bertragen. Erste Donwloads von ELOLINK™ in der Entwicklungsphase finden sie im Menu. Oeffnen Sie dieses durch das hovern mit der Maus an den linken Rand des Bildschirms!</p>
+
+      <img class="zoom code_picture" src="/website/images/example_code.png" alt="example_code">
+
+    </div>
+
+    <div style=
+    "height: 360px;
+     width: 100%;
+     display: flex;
+     justify-content: center;
+     font-size: 30pt;">
+
+    
+      <div>
+        <img class="zoom" src="EloLink.png" alt="elolink_logo" style="height: 300px;width: 300px;display: flex;margin-left: 20px;margin-top: 50%;">
+        
+        <a href="downloads.html" class="cta-button" style="margin-left: 70px;padding-bottom: 10px;">Jetzt herunterladen</a>
+        
+        <p style="font-size: 18px" class="zoom">© 2025 EloLink™ – All rights reserved.</p>
+        <p style="font-size: 18px;color: white;" class="zoom">.</p>
+      </div>
+
+ 
+    </div>
+
+  </div>
+
+  
+
+  </body>
+</html>
+
+<!--
+ue -> &#252;
+ae -> &#228;
+
+-->

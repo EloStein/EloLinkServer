@@ -1,0 +1,125 @@
+#sidebar_section {
+    position: fixed;
+    width: 70px;
+    height: 90%;
+    left: 10px;
+    background-color:transparent;  /*rgba(66, 63, 63, 0.6);*/
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    backdrop-filter: blur(55px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: width 0.3s ease-in-out;
+}
+#sidebar_section:hover {
+    width: 200px;
+}
+#sidebar_section:hover .sidebar_text {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+
+#registration_section {
+    position: relative;
+    max-width: 400px;
+    background-color:transparent;  /*rgba(66, 63, 63, 0.6);*/
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    backdrop-filter: blur(55px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 3rem;
+    transition: all 0.5s ease-in-out;
+}
+
+
+#info_section {
+    position: fixed;
+    width: 70px;
+    height: 90%;
+    right: 10px;
+    background-color: transparent; /*rgba(66, 63, 63, 0.6);*/
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    backdrop-filter: blur(55px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: width 0.3s ease-in-out;
+}
+.elolink_icon {
+    position: absolute;
+    top: 30px;
+    right: 12%;
+    width: 40px;
+    transition: all 0.5s ease-in-out;
+}
+#info_section:hover {
+     width: 350px;
+}
+#info_section .elolink_icon {
+    width: 50px;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+#info_section:hover .elolink_icon {
+    transform: scale(2);
+}
+#info_section:hover .sidebar_text {
+    opacity: 1;
+    transform: translateX(-40px);
+}
+
+
+#profile_section {
+    position: fixed;
+    width: 350px;
+    height: 90%;
+    left: 90px;
+    background-color:transparent;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    backdrop-filter: blur(55px);
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    overflow-y: overlay;
+    overflow-x: auto;
+    transition: width 0.3s ease-in-out;
+}
+#profile_section::-webkit-scrollbar {
+    width: 10px;
+}
+#profile_section::-webkit-scrollbar-track {
+    background: transparent;
+}
+#profile_section::-webkit-scrollbar-thumb {
+    background: rgba(159, 159, 159, 0);
+    border-radius: 2px;
+}
+#profile_section::-webkit-scrollbar-thumb:hover {
+    background: rgba(170, 170, 170, 0.24);
+}
+
+#chat_section {
+    position: fixed;
+    width: 60%;
+    height: 90%;
+    right: 90px;
+    background-color:transparent;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    backdrop-filter: blur(55px);
+    display: flex;
+    align-items: baseline ;
+    justify-content: center;
+    flex-direction: column;
+    transition: width 0.3s ease-in-out;
+    box-sizing: border-box;
+}
+

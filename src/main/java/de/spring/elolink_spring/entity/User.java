@@ -1,6 +1,7 @@
 package de.spring.elolink_spring.entity;
 
 import de.spring.elolink_spring.dtos.ChatDto;
+import de.spring.elolink_spring.dtos.SignupUserDto;
 import de.spring.elolink_spring.dtos.UserDto;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -12,6 +13,9 @@ public class User {
     private Long id;
     private String uuid;
     private String userName;
+    private String email;
+    private String verificationToken;
+    private boolean isVerified;
     private String timestamp;
     private String password;
     private String publicKey;
@@ -22,10 +26,13 @@ public class User {
     public User(){
     }
 
-    public User(Long id, String uuid, String userName, String timestamp, String password, String publicKey, String profilePicture, String gender, String description) {
+    public User(Long id, String uuid, String userName, String email, String verificationToken, boolean isVerified, String timestamp, String password, String publicKey, String profilePicture, String gender, String description) {
         this.id = id;
         this.uuid = uuid;
         this.userName = userName;
+        this.email = email;
+        this.verificationToken = verificationToken;
+        this.isVerified = isVerified;
         this.timestamp = timestamp;
         this.password = password;
         this.publicKey = publicKey;
@@ -39,6 +46,9 @@ public class User {
                 null,
                 dto.getUuid(),
                 dto.getUserName(),
+                dto.getEmail(),
+                dto.getVerificationToken(),
+                dto.iIsVerified(),
                 dto.getTimestamp(),
                 dto.getPassword(),
                 dto.getPublicKey(),
@@ -46,6 +56,47 @@ public class User {
                 dto.getGender(),
                 dto.getDescription()
         );
+    }
+
+    public static User fromSignupDto(SignupUserDto dto){
+        return new User(
+                null,
+                null,
+                dto.getUsername(),
+                dto.getEmail(),
+                null,
+                false,
+                null,
+                dto.getPassword(),
+                null,
+                null,
+                null,
+                null
+        );
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getVerificationToken() {
+        return verificationToken;
+    }
+
+    public void setVerificationToken(String verificationToken) {
+        this.verificationToken = verificationToken;
+    }
+
+    public boolean isVerified() {
+        return isVerified;
+    }
+
+    public void setVerified(boolean isVerified) {
+        this.isVerified = isVerified;
     }
 
     public Long getId() {

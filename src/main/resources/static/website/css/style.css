@@ -1,0 +1,199 @@
+body{
+    font-family: Helvetica, sans-serif;
+    padding: 25px;
+    font-size: 18px;
+    color: rgb(79, 77, 77);
+    background: 102%;
+    background: rgb(186, 183, 183);
+  /*  background: linear-gradient(
+  to bottom,
+  rgb(186, 183, 183) 0%,
+  rgb(186, 183, 183) 60%,
+  rgb(134, 133, 133) 60%,
+  rgb(134, 133, 133) 100%
+);background-size: 100%;*/
+background: linear-gradient(to bottom, rgb(167, 165, 165) 70%, rgb(255, 255, 255) 50%);
+    background-repeat: no-repeat;
+    position: relative;
+  overflow-x: hidden;
+
+}
+
+
+
+p{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 35px ;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+
+.zoom {
+    transition: transform .2s;
+}
+
+.introduction{
+    display: flex;
+    align-items: center;
+}
+
+.introduction_text{
+    width: 50%;
+    font-size: larger;
+}
+
+.code_picture{
+    height: 40%;
+    width: 45%;
+    display: flex;
+    margin-left: 20px;
+}
+  
+.zoom:hover {
+    -ms-transform: scale(4);  /*Edge*/
+    -webkit-transform: scale(1.5); /*Chrome,Safari*/
+    transform: scale(1.05);; /*Standart*/
+}
+
+
+#myInput {
+    background-image: url('/css/searchicon.png');
+    background-position: 0px 12px;
+    background-repeat: no-repeat;
+    background-color: rgb(42, 39, 39);
+    color: rgb(255, 255, 255);
+    width: 84%;
+    height: 40px;
+    margin-left: 3px;
+    font-size: 20px;
+    border: 1px solid rgb(42, 39, 39);
+    margin-bottom: 12px;
+    /*padding: 8px 8px 8px 32px;*/
+    padding: 8px 8px 8px 33px;
+}
+  
+#myUL {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+  /* F&#252;r das SeitenMenu */ 
+.sidebar {
+    height: 100%; /* 100% Full-height */
+    width: 305px; /* 110 */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0;
+    left: 0;
+    /*background-color: rgb(244, 64, 64);*/
+    background: rgba(0, 0, 0, 0.9); /* Black background with 0.5 opacity */
+    /*background-color: #111; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 20px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
+}
+  
+  /* F&#252;r das SeitenMenu Verkn&#252;pfungen*/
+.sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px; /*0*/
+    color: #818181;
+    display: flex;
+    justify-content: start;
+    transition: 0.3s;
+}
+
+
+.sidebar h2 {
+  text-decoration: none;
+  font-size: 35px; /*25*/
+  color: #818181;
+  display: flex;
+  justify-content: center;
+  transition: 0.3s;
+
+}
+  
+
+.sidebar a:hover {
+    color: #f1f1f1;
+}
+
+  
+#main {
+    margin-left: 110px;
+}
+   
+  
+.dark-mode {
+    background: black;
+    color: white;
+}
+
+
+@media (max-width: 1000px) {
+  
+  
+    .introduction{
+        display:block;
+
+    }
+
+    .introduction_text{
+        width: 90%;
+    }
+
+    .code_picture{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    margin-left: 20px;
+    margin-bottom: 20%;
+
+}
+
+
+}
+
+
+.cta-button {
+  padding: 12px 25px;
+  background-color: #3c3c3c;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

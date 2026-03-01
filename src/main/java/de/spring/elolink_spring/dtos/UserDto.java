@@ -6,6 +6,9 @@ public class UserDto {
 
     private String uuid;
     private String userName;
+    private String email;
+    private String verificationToken;
+    private boolean isVerified;
     private String timestamp;
     private String password;
     private String publicKey;
@@ -16,9 +19,12 @@ public class UserDto {
     public UserDto(){
     }
 
-    public UserDto(String uuid, String userName, String timestamp, String password, String publicKey, String profilePicture, String gender, String description) {
+    public UserDto(String uuid, String userName, String email, String verificationToken, boolean isVerified, String timestamp, String password, String publicKey, String profilePicture, String gender, String description) {
         this.uuid = uuid;
         this.userName = userName;
+        this.email = email;
+        this.verificationToken = verificationToken;
+        this.isVerified = isVerified;
         this.timestamp = timestamp;
         this.password = password;
         this.publicKey = publicKey;
@@ -31,6 +37,9 @@ public class UserDto {
         return new UserDto(
                 user.getUuid(),
                 user.getUserName(),
+                user.getEmail(),
+                user.getVerificationToken(),
+                user.isVerified(),
                 user.getTimestamp(),
                 user.getPassword(),
                 user.getPublicKey(),
@@ -38,6 +47,30 @@ public class UserDto {
                 user.getGender(),
                 user.getDescription()
         );
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getVerificationToken() {
+        return verificationToken;
+    }
+
+    public void setVerificationToken(String verificationToken) {
+        this.verificationToken = verificationToken;
+    }
+
+    public boolean iIsVerified() {
+        return isVerified;
+    }
+
+    public void setVerified(boolean isVerified) {
+        this.isVerified = isVerified;
     }
 
     public String getUuid() {

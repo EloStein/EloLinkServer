@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EloLink | Login</title>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <link rel="stylesheet" href="/website/css/signup.css">
+    <link rel="stylesheet" href="/website/css/sections.css">
+    <link rel="stylesheet" href="/website/css/boxes.css">
+
+    <script type="module" src="/website/js/signup.js" defer></script>
+</head>
+<body>
+
+<!-- Login(Registration) Section -->
+<section id="registration_section">
+    <form action="/elolink/login" method="post">
+        <h1>Login</h1>
+        <div class="dialog-row">
+            <label th:if="${param.error}" th:text="${session['SPRING_SECURITY_LAST_EXCEPTION'].message}"
+                   class="text-center redText"></label>
+        </div>
+        <div class="inputbox">
+            <ion-icon name="email-outline"></ion-icon>
+            <input name="username" id="username" type="name" required>
+            <label for="">Username</label>
+        </div>
+        <div class="inputbox">
+            <ion-icon name="lock-closed-outline"></ion-icon>
+            <input name="password" type="password" id="password" required>
+            <label for="">Password</label>
+        </div>
+        <div class="register">
+            <p><a href="#">Forgot Password ?</a></p>
+        </div>
+        <button>Log in</button>
+        <div class="register">
+            <p>Don't have a account ?<a href="/elolink/signup"> Sign up!</a></p>
+        </div>
+    </form>
+</section>
+
+<!-- Sidebar Section -->
+<section id="sidebar_section">
+    <form action="/elolink/signup" method="post">
+
+        <div class="headerbox">
+            <ion-icon name="home-outline"></ion-icon>
+        </div>
+        <ul class="listbox">
+            <li class="sidebar_text"><a href="/elolink/login" class="link">Homepage</a></li>
+            <li class="sidebar_text"><a href="/elolink/login" class="link">Sign up</a></li>
+            <li class="sidebar_text"><a href="/elolink/login" class="link">Login</a></li>
+            <li class="sidebar_text"><a href="/elolink/login" class="link">App Download</a></li>
+            <li class="sidebar_text"><a href="/elolink/login" class="link">App Modification</a></li>
+            <li class="sidebar_text"><a href="/elolink/login" class="link">Api Usage</a></li>
+            <li class="sidebar_text"><a href="/elolink/login" class="link">Authors</a></li>
+            <li class="sidebar_text"><a href="/elolink/login" class="link">About Me</a></li>
+            <li class="sidebar_text"><a href="/elolink/login" class="link">Imprint</a></li>
+            <li class="sidebar_text"><a href="/elolink/login" class="link"> </a></li>
+            <li class="sidebar_text"><a href="/elolink/login" class="link">Work in Progress!!!</a></li>
+        </ul>
+    </form>
+</section>
+
+</body>
+  
