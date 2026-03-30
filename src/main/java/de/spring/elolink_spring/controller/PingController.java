@@ -7,11 +7,9 @@ import de.spring.elolink_spring.repository.UserRepository;
 import de.spring.elolink_spring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.nio.file.Path;
 import java.time.LocalTime;
 
 @RestController
@@ -47,8 +45,8 @@ public class PingController {
 //                dto.getGender(),
 //                dto.getDescription()
 //        ));
-
-        return String.valueOf(userRepository.findByEmail("steinole@yahoo.com"));
+        userRepository.deleteById(1);
+        return "Deleted User ";
     }
 
 }

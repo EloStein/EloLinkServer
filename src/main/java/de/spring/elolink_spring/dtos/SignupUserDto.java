@@ -6,6 +6,8 @@ public class SignupUserDto {
     private String email;
     private String password;
 
+    public SignupUserDto(){}
+
     public SignupUserDto(String username, String email, String password) {
         this.username = username;
         this.email = email;

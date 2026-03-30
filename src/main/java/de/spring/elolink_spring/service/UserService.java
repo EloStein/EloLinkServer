@@ -9,12 +9,14 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -34,7 +36,8 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-         Optional<User> user = userRepository.findByUserName(username);
+         Optional<User> user = Optional.ofNullable(userRepository.findByUserName(username));
+
          if (user.isPresent()) {
              var userObject = user.get();
              return org.springframework.security.core.userdetails.User.builder()
@@ -49,18 +52,25 @@ public class UserService implements UserDetailsService {
     @Transactional
     public ResponseEntity<String> registerUser(SignupUserDto userDto){
         User user = User.fromSignupDto(userDto);
-        User existingUser = userRepository.findByEmail(user.getEmail());
+        User existingUser = userRepository.findByUserName(user.getUserName());
 
         if (existingUser != null) {
             if (existingUser.isVerified()) {
                 return new ResponseEntity<>("User existing and already verified!", HttpStatus.BAD_REQUEST);
             } else {
-                String verificationToken = JwtTokenUtil.generateToken(existingUser.getEmail());
-                existingUser.setVerificationToken(verificationToken);
-                userRepository.save(existingUser);
+                String mail = user.getEmail();
+                String existingMail = existingUser.getEmail();
+                if (Objects.equals(mail, existingMail)) {
+                    String verificationToken = JwtTokenUtil.generateToken(existingUser.getEmail());
+                    existingUser.setVerificationToken(verificationToken);
+                    userRepository.save(existingUser);
 
-                emailService.sendVerificationEmail(existingUser.getEmail(), verificationToken);
-                return new ResponseEntity<>("Verification Email resent. Check your Inbox", HttpStatus.OK);
+                    emailService.sendVerificationEmail(existingUser.getEmail(), verificationToken);
+                    System.out.println("Verification Email resent. Check your Inbox");
+                    return new ResponseEntity<>("Verification Email resent. Check your Inbox", HttpStatus.OK);
+                } else {
+                    return new ResponseEntity<>("Username already in use!", HttpStatus.OK);
+                }
             }
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -97,7 +107,7 @@ public class UserService implements UserDetailsService {
         User existingUser = userRepository.findByEmail(user.getEmail());
 
         if (existingUser != null){
-            if (existingUser.isVerified()){
+            if (existingUser.isVerified()) {
                 return new ResponseEntity<>("User already existing and verified", HttpStatus.BAD_REQUEST);
             } else {
                 String verificationToken = "123123";
@@ -117,15 +127,26 @@ public class UserService implements UserDetailsService {
     }
 
     public UserDto getUser(String username) {
-        Optional<User> user = userRepository.findByUserName(username);
-        return UserDto.fromUser(user.get());
+        User user = userRepository.findByUserName(username); //Changed to User instead of Optional<User> and removed .get from fromUser(); :COULD CAUSE CRASHED
+        return UserDto.fromUser(user);
+    }
+
+    public UserDto getSelf(Authentication authentication) {
+        User user =  userRepository.findByUserName(authentication.getName());  //Changed to User instead of Optional<User> and removed .get from fromUser(); :COULD CAUSE CRASHED
+        return UserDto.fromUser(user);
     }
 
     @Transactional
-    public String deleteUser(String uuid){
-        userRepository.deleteByUuid(uuid);
-        System.out.println("#Deleted User with Uuid " + uuid);
-        return "200";
+    public ResponseEntity<String> deleteUser(String username, Authentication authentication){
+        if (!userRepository.existsByUserName(username)){
+            return new ResponseEntity<>("User doesn't exist", HttpStatus.BAD_REQUEST);
+        }
+        if (!Objects.equals(username, authentication.getName())){
+            return new ResponseEntity<>("Requested username and authenticated username don't match!", HttpStatus.UNAUTHORIZED);
+        }
+        userRepository.deleteByUserName(username);
+        System.out.println("#Deleted User with Uuid " + username);
+        return new ResponseEntity<>("Deleted User " + username, HttpStatus.OK);
     }
 
     @Transactional
@@ -136,18 +157,25 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional
-    public String updateUser(String uuid, UserDto userDto){
-        User user = userRepository.findByUuid(uuid);
-        user.setUserName(userDto.getUserName());
-        user.setDescription(userDto.getDescription());
-        user.setGender(userDto.getGender());
-        user.setProfilePicture(userDto.getProfilePicture());
-        user.setPublicKey(userDto.getPublicKey());
-        user.setPassword(userDto.getPassword());
-        user.setTimestamp(userDto.getTimestamp());
-        userRepository.save(user);
-        System.out.println("#Updated User with Uuid " + uuid);
-        return "200";
+    public ResponseEntity<String> updateUser(String username, UserDto userDto, Authentication authentication){
+        if (!userRepository.existsByUserName(username)){
+            return new ResponseEntity<>("User doesn't exist", HttpStatus.BAD_REQUEST);
+        }
+        if (!Objects.equals(username, authentication.getName())){
+            return new ResponseEntity<>("Requested username and authenticated username don't match!", HttpStatus.UNAUTHORIZED);
+        }
+        User user = userRepository.findByUserName(username);  //Changed to User instead of Optional<User> and removed .get from fromUser(); :COULD CAUSE CRASHED
+        User updatedUser = user;
+        updatedUser.setUserName(userDto.getUserName());
+        updatedUser.setDescription(userDto.getDescription());
+        updatedUser.setGender(userDto.getGender());
+        updatedUser.setProfilePicture(userDto.getProfilePicture());
+        updatedUser.setPublicKey(userDto.getPublicKey());
+        updatedUser.setPassword(userDto.getPassword());
+        updatedUser.setTimestamp(userDto.getTimestamp());
+        userRepository.save(updatedUser);
+        System.out.println("#Updated User with Uuid " + updatedUser);
+        return new ResponseEntity<>("Updated User " + username, HttpStatus.OK);
     }
 
 

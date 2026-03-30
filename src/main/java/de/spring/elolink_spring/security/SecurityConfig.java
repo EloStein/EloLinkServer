@@ -21,13 +21,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EnableWebSecurity
 public class SecurityConfig {
 
-//    @Autowired
-//    private final UserService userService;
-//
-//    public SecurityConfig(UserService userService) {
-//        this.userService = userService;
-//    }
-
     @Bean
     public UserDetailsService userDetailsService(UserService userService) {
         return userService;
@@ -56,13 +49,13 @@ public class SecurityConfig {
                 .authorizeHttpRequests(registry -> {
                     registry.requestMatchers(
                             "/elolink/signup",
-                            "/elolink/chat",
+                            "/elolink/misc/**",
+                            "/elolink/chat", // TEMPORÄR !!!!!!!!!!!!!!
                             "/website/css/**",
                             "/website/js/**",
                             "/elolink/ping",
                             "/elolink/debug",
                             "/elolink/"
-                            //"/elolink/getuser/**",
 
                     ).permitAll();
                     registry.anyRequest().authenticated();
