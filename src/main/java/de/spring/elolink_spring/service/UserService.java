@@ -76,11 +76,12 @@ public class UserService implements UserDetailsService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         String verificationToken = JwtTokenUtil.generateToken(user.getEmail());
         user.setVerificationToken(verificationToken);
-        user.setId((long) (null == userRepository.findMaxId() ? 0 : userRepository.findMaxId() + 1));
+        //user.setId((long) (null == userRepository.findMaxId() ? 0 : userRepository.findMaxId() + 1));
+        user.setId(null);
         userRepository.save(user);
 
         emailService.sendVerificationEmail(user.getEmail(), verificationToken);
-        return new ResponseEntity<>("Registration succesfull! Please verify your Email", HttpStatus.OK);
+        return new ResponseEntity<>("Registration successful! Please verify your via Email", HttpStatus.OK);
     }
 
     @Transactional

@@ -1,16 +1,13 @@
 package de.spring.elolink_spring.controller;
 
-import de.spring.elolink_spring.dtos.ChatDto;
-import de.spring.elolink_spring.dtos.UserDto;
 import de.spring.elolink_spring.entity.User;
 import de.spring.elolink_spring.repository.UserRepository;
 import de.spring.elolink_spring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.nio.file.Path;
 import java.time.LocalTime;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/elolink")
@@ -45,8 +42,8 @@ public class PingController {
 //                dto.getGender(),
 //                dto.getDescription()
 //        ));
-        userRepository.deleteById(1);
-        return "Deleted User ";
+        Optional<User> user = userRepository.findById(1);
+        return "Deleted User " + user.get().getEmail();
     }
 
 }

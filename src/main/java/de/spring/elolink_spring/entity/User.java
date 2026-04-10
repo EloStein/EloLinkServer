@@ -3,13 +3,14 @@ package de.spring.elolink_spring.entity;
 import de.spring.elolink_spring.dtos.ChatDto;
 import de.spring.elolink_spring.dtos.SignupUserDto;
 import de.spring.elolink_spring.dtos.UserDto;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "`user`")
 public class User {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String uuid;
     private String userName;
