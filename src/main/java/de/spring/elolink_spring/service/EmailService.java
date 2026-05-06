@@ -1,5 +1,7 @@
 package de.spring.elolink_spring.service;
 
+import de.spring.elolink_spring.dtos.SignupUserDto;
+import de.spring.elolink_spring.dtos.UserDto;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,7 +21,7 @@ public class EmailService {
     private String from;
 
     public void sendVerificationEmail(String email, String verificationToken) {
-        String subject = "Emial Verification";
+        String subject = "Email Verification";
         String path = "/elolink/signup/verify";
         String message = "Click the button below to verify your email address:";
         sendEmail(email, verificationToken, subject, path, message);
@@ -38,6 +40,7 @@ public class EmailService {
                     .path(path)
                     .queryParam("token", token)
                     .toUriString();
+
             String content = """
                     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border-radius: 8px; background-color: #f9f9f9; text-align: center;">
                         <h2 style="color: #333;">%s</h2>

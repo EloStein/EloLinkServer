@@ -39,6 +39,9 @@
             <input type="password" id="passwordcon" name="passwordcon" required>
             <label>Confirm Password</label>
         </div>
+        <div class="reg_response">
+            <p id="response_text">Make sure to use a strong password</p>
+        </div>
         <button id="submit" type="submit">Sign Up</button>
         <div class="register">
             <p>Already have an account? <a href="login.html">Log In</a></p>
@@ -48,8 +51,7 @@
 
 <!-- Sidebar Section -->
 <section id="sidebar_section">
-    <form action="/elolink/signup" method="post">
-
+    <div>
         <div class="headerbox">
             <ion-icon name="home-outline"></ion-icon>
         </div>
@@ -66,12 +68,12 @@
             <li class="sidebar_text"><a href="/elolink/login" class="link"> </a></li>
             <li class="sidebar_text"><a href="/elolink/login" class="link">Work in Progress!!!</a></li>
         </ul>
-    </form>
+    </div>
 </section>
 
 <!-- Information Section -->
 <section id="info_section">
-    <form action="/elolink/signup" method="post">
+    <div>
 
         <img src="../static/website/images/elolink_icon.jpg" class="elolink_icon">
         <ul class="listbox">
@@ -87,43 +89,9 @@
 
 
         </ul>
-    </form>
+    </div>
 </section>
 
 
 </body>
 </html>
-<script>
-    const submitButttom = document.getElementById("submit");
-    submitButttom.addEventListener('click', () => {
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
-        const confirmPassword = document.getElementById('passwordcon').value;
-        const email = document.getElementById('email').value;
-        const data = {
-            username,
-            email,
-            password
-        }
-
-        if (password == confirmPassword) {
-            const jsonData = JSON.stringify(data);
-            fetch('/elolink/signup', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: jsonData
-            })
-                .then(response => {
-                    //alert('succesfull');
-                    //if(response.status == 200){
-                    //alert('succesfull');
-                    //xs}
-                })
-        }
-
-    })
-
-
-</script>

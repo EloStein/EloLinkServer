@@ -13,7 +13,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String uuid;
+    @Column(unique = true)
     private String userName;
+    @Column(unique = true)
     private String email;
     private String verificationToken;
     private boolean isVerified;

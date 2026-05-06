@@ -12,6 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -36,6 +37,7 @@ public class ChatService {
         }
         Chat chat = Chat.fromDto(chatDto);
         chat.setId((long) (null == chatRepository.findMaxId() ? 0 : chatRepository.findMaxId() + 1));
+        chat.setTimestamp(LocalDateTime.now().toString());
         chatRepository.save(chat);
         System.out.println("#Added chat '" + chatDto.getMessage() + "' from sender " + chatDto.getSender());
         return new ResponseEntity<>("Added chat from user " + chat.getSender(), HttpStatus.OK);
@@ -50,7 +52,7 @@ public class ChatService {
                         (chat.getSender().equals(uuid1) && chat.getReceiver().equals(uuid2)) ||
                                 (chat.getSender().equals(uuid2) && chat.getReceiver().equals(uuid1))
                 )
-                .sorted(Comparator.comparing(Chat::getTimestamp).reversed())
+                .sorted(Comparator.comparing(Chat::getTimestamp)) //.reversed()
                 .map(ChatDto::fromChat)
                 .toList();
         System.out.println();

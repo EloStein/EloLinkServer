@@ -54,7 +54,9 @@ public class UserService implements UserDetailsService {
         User user = User.fromSignupDto(userDto);
         User existingUser = userRepository.findByUserName(user.getUserName());
 
+        System.out.println("Starting Registration");
         if (existingUser != null) {
+            System.out.println("ExistingUser NOT null!");
             if (existingUser.isVerified()) {
                 return new ResponseEntity<>("User existing and already verified!", HttpStatus.BAD_REQUEST);
             } else {
@@ -81,11 +83,11 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
 
         emailService.sendVerificationEmail(user.getEmail(), verificationToken);
-        return new ResponseEntity<>("Registration successful! Please verify your via Email", HttpStatus.OK);
+        return new ResponseEntity<>("Registration successful! Please verify your Account via the Email we sent you.", HttpStatus.OK);
     }
 
     @Transactional
-    public ResponseEntity verifyUser(String token) {
+    public ResponseEntity<String> verifyUser(String token) {
         String email = jwtUtil.extractEmail(token);
         User user = userRepository.findByEmail(email);
         if (user == null || user.getVerificationToken() == null) {

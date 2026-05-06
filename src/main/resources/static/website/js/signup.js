@@ -14,8 +14,6 @@ document.addEventListener('DOMContentLoaded', function () {
         event.preventDefault();
         console.log("FUNCTION")
 
-        await login()
-
         const form = document.querySelector("form");
         const username = document.querySelector('input[name="username"]');
         const email = document.querySelector('input[type="email"]');
@@ -31,8 +29,8 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log("Password mismatch");
         } else {
             const response = await registerUser(username.value, email.value, password.value);
-            console.log(response)
-
+            const responseText = document.getElementById('response_text');
+            responseText.innerText = response;
         }
 
 

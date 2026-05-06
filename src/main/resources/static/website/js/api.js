@@ -7,7 +7,7 @@ export async function login() {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             body: new URLSearchParams({
-                username: 'Mat',
+                username: 'Elo',
                 password: 'test'
             })
         });
@@ -92,9 +92,7 @@ export async function registerUser(username, email, password) {
                 })
             });
             try {
-                const responseData = await response.text();
-                console.log("RESPONSE: " + responseData)
-                return await response.json();
+                return await response.text();
             } catch (error) {
                 console.log(error)
             }

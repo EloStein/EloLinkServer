@@ -14,7 +14,7 @@ body {
   min-height: 100vh;
   background-image: url(https://user-images.githubusercontent.com/13468728/233847739-219cb494-c265-4554-820a-bd3424c59065.jpg);
   background-repeat: no-repeat;
-    background-color: #f8f8f8;
+    background-color: #1b1a1a;
   background-position: center;
   background-size: cover;
 }
@@ -60,7 +60,21 @@ button:hover {
 
 .register p a:hover {
   text-decoration: underline;
-  color: #a8a8a8;
+}
+
+.reg_response {
+  font-size: 0.9rem;
+  color: rgba(182, 24, 24, 0.97);
+  text-align: center;
+  margin: 25px 0 10px;
+  transition: all 0.5s ease-in-out;
+}
+
+.reg_response p a {
+  text-decoration: none;
+  color: rgba(182, 24, 24, 0.97);
+  font-weight: 600;
+  transition: all 0.5s ease-in-out;
 }
 
 

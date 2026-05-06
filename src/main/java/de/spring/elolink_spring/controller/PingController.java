@@ -3,6 +3,7 @@ package de.spring.elolink_spring.controller;
 import de.spring.elolink_spring.entity.User;
 import de.spring.elolink_spring.repository.UserRepository;
 import de.spring.elolink_spring.service.UserService;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
