@@ -1,5 +1,7 @@
 package de.spring.elolink_spring.entity;
 
+import de.spring.elolink_spring.dtos.ChatDto;
+import de.spring.elolink_spring.dtos.RelationDto;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import org.springframework.security.core.parameters.P;
@@ -9,7 +11,7 @@ public class Relation {
 
     @Id
     private Long id;
-    private String self;
+    private String username;
     private String friend;
     private boolean isAccepted;
     private boolean isBlocked;
@@ -18,13 +20,24 @@ public class Relation {
     public Relation(){
     }
 
-    public Relation(Long id, String self, String friend, boolean isAccepted, boolean isBlocked, String timestamp) {
+    public Relation(Long id, String username, String friend, boolean isAccepted, boolean isBlocked, String timestamp) {
         this.id = id;
-        this.self = self;
+        this.username = username;
         this.friend = friend;
         this.isAccepted = isAccepted;
         this.isBlocked = isBlocked;
         this.timestamp = timestamp;
+    }
+
+    public static Relation fromDto(RelationDto dto){
+        return new Relation(
+                null,
+                dto.getUsername(),
+                dto.getFriend(),
+                false,
+                dto.isBlocked(),
+                null
+        );
     }
 
     public Long getId() {
@@ -35,12 +48,12 @@ public class Relation {
         this.id = id;
     }
 
-    public String getSelf() {
-        return self;
+    public String getUsername() {
+        return username;
     }
 
-    public void setSelf(String self) {
-        this.self = self;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getFriend() {

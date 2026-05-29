@@ -22,7 +22,7 @@ export async function login() {
 
 
 export async function getProfiles() {
-    const profiles = await ipcRenderer.invoke("getProfiles");
+    const profiles = await ipcRFenderer.invoke("getProfiles");
     const friendlist = document.getElementById("friendlist");
     console.log(profiles);
 
