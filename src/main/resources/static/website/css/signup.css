@@ -12,9 +12,11 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background-image: url(https://user-images.githubusercontent.com/13468728/233847739-219cb494-c265-4554-820a-bd3424c59065.jpg);
+  /*background-image: url(https://user-images.githubusercontent.com/13468728/233847739-219cb494-c265-4554-820a-bd3424c59065.jpg);
+  */
+  background-image: url(https://github.com/Carla-Codes/starry-night-css-animation/blob/master/stars.png?raw=true);
   background-repeat: no-repeat;
-    background-color: #1b1a1a;
+  background-color: rgba(28, 26, 26, 0.94);
   background-position: center;
   background-size: cover;
 }

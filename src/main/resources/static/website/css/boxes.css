@@ -142,7 +142,7 @@ input:valid ~ label {
     padding: 8px 12px;
     border-radius: 16px;
     /*background-color: #3a3b3aff;*/
-    background: transparent;
+    background-color: rgba(255, 255, 255, 0.07); /*transparent*/
     color: white;
     line-height: 1.2;
     box-shadow: 2px 4px 12px rgba(0,0,0,0.3);
@@ -160,7 +160,7 @@ input:valid ~ label {
 }
 .message.me {
     align-self: flex-end;
-    background-color: transparent;
+    background-color: rgba(255, 255, 255, 0.07); /*transparent*/
     backdrop-filter: blur(5px);
     color: rgb(255, 255, 255);
     border: 2px solid rgba(255, 255, 255, 0.245);
@@ -168,7 +168,7 @@ input:valid ~ label {
 }
 .message.other {
     align-self: flex-start;
-    background-color: transparent;
+    background-color: rgba(255, 255, 255, 0.07); /*transparent*/
     backdrop-filter: blur(5px);
     color: rgb(255, 255, 255);
     border: 2px solid rgba(255, 255, 255, 0.245);

@@ -3,7 +3,7 @@
     width: 70px;
     height: 90%;
     left: 10px;
-    background-color:transparent;  /*rgba(66, 63, 63, 0.6);*/
+    background-color: transparent;
     border: 2px solid rgba(255, 255, 255, 0.5);
     border-radius: 20px;
     backdrop-filter: blur(55px);
@@ -12,6 +12,7 @@
     justify-content: center;
     overflow: hidden;
     transition: width 0.3s ease-in-out;
+    box-shadow: 2px 4px 12px rgba(0,0,0,0.3);
 }
 #sidebar_section:hover {
     width: 200px;
@@ -26,7 +27,7 @@
     position: relative;
     min-width: 400px;
     max-width: 400px;
-    background-color:transparent;  /*rgba(66, 63, 63, 0.6);*/
+    background-color: transparent; /*transparent*/
     border: 2px solid rgba(255, 255, 255, 0.5);
     border-radius: 20px;
     backdrop-filter: blur(55px);
@@ -35,6 +36,7 @@
     align-items: center;
     padding: 2rem 3rem;
     transition: all 0.5s ease-in-out;
+    box-shadow: 2px 4px 12px rgba(0,0,0,0.3);
 }
 
 
@@ -43,7 +45,7 @@
     width: 70px;
     height: 90%;
     right: 10px;
-    background-color: transparent; /*rgba(66, 63, 63, 0.6);*/
+    background-color: transparent; /*transparent*/
     border: 2px solid rgba(255, 255, 255, 0.5);
     border-radius: 20px;
     backdrop-filter: blur(55px);
@@ -52,6 +54,7 @@
     justify-content: center;
     overflow: hidden;
     transition: width 0.3s ease-in-out;
+    box-shadow: 2px 4px 12px rgba(0,0,0,0.3);
 }
 .elolink_icon {
     position: absolute;
@@ -82,7 +85,7 @@
     width: 350px;
     height: 90%;
     left: 90px;
-    background-color:transparent;
+    background-color: transparent; /*transparent*/
     border: 2px solid rgba(255, 255, 255, 0.5);
     border-radius: 20px;
     backdrop-filter: blur(55px);
@@ -92,6 +95,7 @@
     overflow-y: overlay;
     overflow-x: auto;
     transition: width 0.3s ease-in-out;
+    box-shadow: 2px 4px 12px rgba(0,0,0,0.3);
 }
 #profile_section::-webkit-scrollbar {
     width: 10px;
@@ -112,15 +116,16 @@
     width: 60%;
     height: 90%;
     right: 90px;
-    background-color:transparent;
+    background-color: transparent; /*transparent*/
     border: 2px solid rgba(255, 255, 255, 0.5);
     border-radius: 20px;
-    backdrop-filter: blur(55px);
+    backdrop-filter: blur(15px);
     display: flex;
     align-items: baseline ;
     justify-content: center;
     flex-direction: column;
     transition: width 0.3s ease-in-out;
     box-sizing: border-box;
+    box-shadow: 2px 4px 12px rgba(0,0,0,0.3);
 }
 

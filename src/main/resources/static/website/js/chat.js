@@ -1,15 +1,35 @@
-import {login ,getConversation, getSelf, getUser} from "./api.js";
+import {login ,getConversation, getSelf, getUser, getRelations} from "./api.js";
 
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', async function () {
+
+    // Login
+    await login()
+
+    // Get Self
+    const self = await getSelf();
+    console.log("Logged in as: " + self.userName);
+
+    // Get & Add Relations
+    const relations = await getRelations()
+    console.log("Loaded Relations: " + relations.length);
+    for (let i = 0; i < relations.length; i++) {
+        createRelation("Freund", relations[i].friend);
+    }
 
 
     // Eventlistener for Friendbox
-    const friendboxes = document.querySelectorAll('.friendbox');
-    friendboxes.forEach(box => {
-        box.addEventListener('click', handleFriendboxClick);
+    const relationboxes = document.querySelectorAll('.friendbox');
+    relationboxes.forEach(box => {
+        box.addEventListener('click', friendboxClick);
     });
-    async function handleFriendboxClick(event) {
+
+    async function friendboxClick(event) {
+        loadChat(event)
+    }
+
+    async function loadChat(event){
+        console.log("Loading Conversation");
         // Get Elements
         const username = event.currentTarget.querySelector('.friendbox-username').textContent;
 
@@ -18,12 +38,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Get User
         const user = await getUser(username);
-        console.log("USERMAIL: " + user.email);
 
         // Get Self
         const self = await getSelf();
-        console.log("SELF: " + self.userName);
-        console.log("SELF: " + self.email);
 
 
         // Get Conversation
@@ -40,7 +57,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 sender = "other"
             }
 
-            // Add Message to Chatbox
             createMessage(chats[i].message, chats[i].timestamp, sender);
         }
     }
@@ -75,5 +91,32 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelector(".chatbox").appendChild(li);
     }
 
+    function createRelation(name, status){
+        const friendbox = document.createElement("div");
+        friendbox.classList.add("friendbox");
+
+        const img = document.createElement("img");
+        img.src = "/website/images/profile_picture_default.png"
+        img.classList.add("friendbox-pfp");
+
+        const infoDiv = document.createElement("div");
+        infoDiv.classList.add("friendbox-info");
+
+        const nameSpan = document.createElement("span");
+        nameSpan.classList.add("friendbox-name");
+        nameSpan.textContent = name;
+
+        const statusSpan = document.createElement("span");
+        statusSpan.classList.add("friendbox-username");
+        statusSpan.textContent = status;
+
+        infoDiv.appendChild(nameSpan);
+        infoDiv.appendChild(statusSpan);
+
+        friendbox.appendChild(img);
+        friendbox.appendChild(infoDiv);
+
+        document.querySelector("#profile_section > div").appendChild(friendbox);
+    }
 
 });
