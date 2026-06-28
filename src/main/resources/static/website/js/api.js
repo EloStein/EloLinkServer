@@ -1,6 +1,6 @@
 export async function login() {
     try {
-        const loginResponse = await fetch('http://192.168.178.30:25270/elolink/login', {
+        const loginResponse = await fetch('http://192.168.178.56:25270/elolink/login', {
             method: 'POST',
             credentials: 'include',
             headers: {
@@ -11,10 +11,6 @@ export async function login() {
                 password: 'test'
             })
         });
-
-        if (!loginResponse.ok) {
-            throw new Error('Login fehlgeschlagen');
-        }
     } catch (err) {
         console.error(err);
     }
@@ -23,7 +19,7 @@ export async function login() {
 
 export async function getRelations(username) {
     try {
-        const chat = await fetch(`http://192.168.178.30:25270/elolink/api/relation/getfriend`, {
+        const chat = await fetch(`http://192.168.178.56:25270/elolink/api/relation/getfriend`, {
             credentials: 'include'
         });
         return await chat.json();
@@ -35,7 +31,7 @@ export async function getRelations(username) {
 export async function getUser(username) {
     console.log("FRIEND NAME: " + username);
     try {
-        const userResponse = await fetch(`http://192.168.178.30:25270/elolink/api/user/getuser/${username}`, {
+        const userResponse = await fetch(`http://192.168.178.56:25270/elolink/api/user/getuser/${username}`, {
             credentials: 'include'
         });
         return await userResponse.json();
@@ -46,7 +42,7 @@ export async function getUser(username) {
 
 export async function getSelf() {
     try {
-        const userResponse = await fetch(`http://192.168.178.30:25270/elolink/api/user/getself`, {
+        const userResponse = await fetch(`http://192.168.178.56:25270/elolink/api/user/getself`, {
             credentials: 'include'
         });
         return await userResponse.json();
@@ -57,7 +53,7 @@ export async function getSelf() {
 
 export async function getConversation(username1, username2) {
     try {
-        const chat = await fetch(`http://192.168.178.30:25270/elolink/api/chat/getconversation/${username1}/${username2}`, {
+        const chat = await fetch(`http://192.168.178.56:25270/elolink/api/chat/getconversation/${username1}/${username2}`, {
             credentials: 'include'
         });
         return await chat.json();
@@ -69,7 +65,7 @@ export async function getConversation(username1, username2) {
 export async function registerUser(username, email, password) {
     console.log("Trying to reg user: " + username);
         try {
-            const response = await fetch("http://192.168.178.30:25270/elolink/signup", {
+            const response = await fetch("http://192.168.178.56:25270/elolink/signup", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
