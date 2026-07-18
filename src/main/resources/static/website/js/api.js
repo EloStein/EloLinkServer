@@ -16,6 +16,24 @@ export async function login() {
     }
 }
 
+export async function paramLogin(username, password) {
+    try {
+        const loginResponse = await fetch('http://192.168.178.56:25270/elolink/login', {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: new URLSearchParams({
+                username: username,
+                password: password
+            })
+        });
+    } catch (err) {
+        console.error(err);
+    }
+}
+
 
 export async function getRelations(username) {
     try {

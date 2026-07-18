@@ -1,4 +1,4 @@
-import {login ,getConversation, getSelf, getUser, getRelations} from "./api.js";
+import {login ,getConversation, getSelf, getUser, getRelations, paramLogin} from "./api.js";
 
 
 document.addEventListener('DOMContentLoaded', async function () {
@@ -9,6 +9,10 @@ document.addEventListener('DOMContentLoaded', async function () {
     // Get Self
     const self = await getSelf();
     console.log("Logged in as: " + self.userName);
+
+    await paramLogin("elo","test")
+    const self2 = await getSelf();
+    console.log("Logged in asss: " + self2.userName);
 
     // Get & Add Relations
     const relations = await getRelations()
@@ -34,7 +38,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         const username = event.currentTarget.querySelector('.friendbox-username').textContent;
 
         // Login
-        await login()
+        await paramLogin("elo","test")
 
         // Get User
         const user = await getUser(username);

@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }, 500);
 
 
-    const registrationButton = document.getElementById("submit")
+    const registrationButton = document.getElementById("submitReg")
     registrationButton.addEventListener('click', async function (event) {
         event.preventDefault();
         console.log("FUNCTION")
@@ -33,12 +33,6 @@ document.addEventListener('DOMContentLoaded', function () {
             responseText.innerText = response;
         }
 
-
-
-
     });
-
-
-
 
 });
